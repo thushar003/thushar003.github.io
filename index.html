@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thushar Joji — Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0d0b14; --surface:#13101f; --card:#16132a; --border:#2a2545;
+  --accent:#b89aff; --accent2:#7c5cfc; --glow:#9d6fff;
+  --text:#e8e4f8; --muted:#7a7099;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'DM Mono', monospace; font-size: 14px;
+  line-height: 1.7; overflow-x: hidden; cursor: none;
+}
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:999; opacity:0.3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
+}
+#cursor { width:9px; height:9px; border-radius:50%; background:var(--accent); position:fixed; pointer-events:none; z-index:9999; mix-blend-mode:difference; transition:transform 0.2s ease; }
+#cursor-ring { width:30px; height:30px; border-radius:50%; border:1px solid rgba(184,154,255,0.4); position:fixed; pointer-events:none; z-index:9998; transition:border-color 0.2s; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.1rem 3rem; border-bottom:1px solid var(--border); backdrop-filter:blur(24px); background:rgba(13,11,20,0.88); }
+.nav-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.05rem; color:var(--accent); text-decoration:none; letter-spacing:-0.02em; display:flex; align-items:center; gap:0.4rem; }
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a { color:var(--muted); text-decoration:none; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+.nav-links a:hover { color:var(--accent); }
+
+/* HERO */
+#hero { min-height:100vh; display:grid; grid-template-columns:1.1fr 0.9fr; align-items:center; padding:9rem 3rem 4rem; gap:4rem; position:relative; }
+.sketch-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.hero-left { position:relative; z-index:2; }
+.hero-tag { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(124,92,252,0.12); border:1px solid rgba(124,92,252,0.35); color:var(--accent); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.3rem 0.85rem; border-radius:2px; margin-bottom:1.6rem; animation:fadeUp 0.7s ease both; }
+.tag-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(3rem,5.5vw,5rem); line-height:0.95; letter-spacing:-0.04em; color:var(--text); margin-bottom:0.4rem; animation:fadeUp 0.7s 0.1s ease both; }
+h1 em { font-family:'Instrument Serif',serif; font-style:italic; color:var(--accent); text-decoration-line:underline; text-decoration-style:wavy; text-decoration-color:rgba(184,154,255,0.3); text-underline-offset:6px; }
+.hero-sub { font-size:0.87rem; color:var(--muted); margin-bottom:2.5rem; max-width:420px; line-height:1.85; animation:fadeUp 0.7s 0.2s ease both; }
+.hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp 0.7s 0.3s ease both; }
+.btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.7rem 1.4rem; border-radius:3px; font-family:'DM Mono',monospace; font-size:0.78rem; letter-spacing:0.04em; text-decoration:none; transition:all 0.2s; cursor:none; border:none; }
+.btn-primary { background:var(--accent2); color:#fff; box-shadow:0 0 24px rgba(124,92,252,0.4); }
+.btn-primary:hover { background:var(--glow); box-shadow:0 0 36px rgba(157,111,255,0.6); transform:translateY(-1px); }
+.btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
+.hero-right { position:relative; z-index:2; display:flex; flex-direction:column; gap:1rem; animation:fadeUp 0.7s 0.15s ease both; }
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:4px; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1.2rem; transition:border-color 0.25s,box-shadow 0.25s; position:relative; overflow:hidden; }
+.stat-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(124,92,252,0.06),transparent); pointer-events:none; }
+.stat-card:hover { border-color:rgba(184,154,255,0.5); box-shadow:0 0 20px rgba(124,92,252,0.15); }
+.stat-num { font-family:'Syne',sans-serif; font-weight:800; font-size:2rem; color:var(--accent); line-height:1; min-width:3.5rem; }
+.stat-label { color:var(--muted); font-size:0.77rem; line-height:1.5; }
+.stat-label strong { display:block; color:var(--text); font-weight:500; margin-bottom:0.1rem; }
+
+/* SECTIONS */
+section { padding:6rem 3rem; }
+.section-label { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent2); margin-bottom:0.6rem; }
+h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(1.8rem,3vw,2.8rem); letter-spacing:-0.03em; color:var(--text); margin-bottom:3rem; line-height:1.1; }
+h2 em { font-family:'Instrument Serif',serif; font-style:italic; color:var(--muted); }
+
+/* ABOUT */
+#about { border-top:1px solid var(--border); display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+.about-text p { color:var(--muted); margin-bottom:1.2rem; line-height:1.9; font-size:0.87rem; }
+.about-text p strong { color:var(--text); font-weight:500; }
+.languages-block { margin-top:2rem; }
+.lang-title { font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:0.8rem; }
+.lang-pills { display:flex; flex-wrap:wrap; gap:0.5rem; }
+.lang-pill { padding:0.28rem 0.85rem; border-radius:2px; font-size:0.73rem; border:1px solid var(--border); color:var(--text); }
+.lang-pill.fluent { border-color:rgba(184,154,255,0.5); background:rgba(184,154,255,0.08); color:var(--accent); }
+.lang-pill.working { border-color:rgba(124,92,252,0.4); background:rgba(124,92,252,0.08); color:#a08cff; }
+.skills-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+.skill-group-title { font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent2); margin-bottom:0.6rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
+.skill-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+.skill-tag { font-size:0.7rem; padding:0.2rem 0.6rem; background:var(--surface); border:1px solid var(--border); border-radius:2px; color:var(--muted); transition:all 0.15s; }
+.skill-tag:hover { color:var(--accent); border-color:var(--accent); }
+
+/* PROJECTS */
+#projects { border-top:1px solid var(--border); }
+.projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+.project-card { background:var(--card); padding:2rem; display:flex; flex-direction:column; gap:0.8rem; transition:background 0.2s; text-decoration:none; color:inherit; position:relative; }
+.project-card::after { content:''; position:absolute; top:0; right:0; width:40px; height:40px; border-top:2px solid rgba(184,154,255,0.15); border-right:2px solid rgba(184,154,255,0.15); border-top-right-radius:4px; transition:border-color 0.2s; }
+.project-card:hover { background:#1a1530; }
+.project-card:hover::after { border-color:rgba(184,154,255,0.55); }
+.project-card.featured { grid-column:span 2; background:linear-gradient(135deg,#16122a,#110e22); }
+.project-card.featured:hover { background:linear-gradient(135deg,#1d1835,#16122e); }
+.project-num { font-size:0.63rem; color:var(--muted); letter-spacing:0.1em; }
+.project-name { font-family:'Syne',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text); letter-spacing:-0.02em; }
+.project-card.featured .project-name { font-size:1.3rem; }
+.project-desc { font-size:0.78rem; color:var(--muted); line-height:1.75; flex:1; }
+.project-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:auto; }
+.project-tag { font-size:0.63rem; padding:0.15rem 0.5rem; border:1px solid rgba(124,92,252,0.3); background:rgba(124,92,252,0.08); border-radius:2px; color:#a08cff; }
+.project-arrow { align-self:flex-start; color:var(--accent); font-size:1.1rem; margin-top:auto; transition:transform 0.2s; }
+.project-card:hover .project-arrow { transform:translate(3px,-3px); }
+
+/* EXPERIENCE */
+#experience { border-top:1px solid var(--border); }
+.exp-item { display:grid; grid-template-columns:190px 1fr; gap:2rem; padding:2rem 0; border-bottom:1px solid var(--border); }
+.exp-date { font-size:0.7rem; color:var(--muted); margin-bottom:0.3rem; }
+.exp-company { font-family:'Syne',sans-serif; font-weight:700; font-size:0.88rem; color:var(--accent); }
+.exp-role { font-family:'Syne',sans-serif; font-weight:600; font-size:0.98rem; color:var(--text); margin-bottom:0.8rem; }
+.exp-bullets { list-style:none; display:flex; flex-direction:column; gap:0.4rem; }
+.exp-bullets li { font-size:0.79rem; color:var(--muted); padding-left:1.1rem; position:relative; line-height:1.7; }
+.exp-bullets li::before { content:'→'; position:absolute; left:0; color:var(--accent2); font-size:0.68rem; }
+
+/* CONTACT */
+#contact { border-top:1px solid var(--border); text-align:center; padding:7rem 3rem; position:relative; overflow:hidden; }
+.contact-glow { position:absolute; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(124,92,252,0.12) 0%,transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; }
+#contact h2 { margin-bottom:1rem; position:relative; }
+#contact p { color:var(--muted); max-width:380px; margin:0 auto 2.5rem; font-size:0.84rem; line-height:1.85; position:relative; }
+.contact-links { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; position:relative; }
+footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:0.7rem; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease,transform 0.65s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  #hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;gap:2.5rem}
+  .hero-right{display:none}
+  #about{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card.featured{grid-column:span 1}
+  .exp-item{grid-template-columns:1fr;gap:0.5rem}
+  section{padding:3rem 1.5rem}
+  .skills-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <filter id="pencil">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04 0.06" numOctaves="5" seed="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+    TJ
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="sketch-bg">
+    <!-- Purple glow blobs -->
+    <div style="position:absolute;top:15%;right:10%;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(124,92,252,0.13) 0%,transparent 70%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:5%;right:25%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(184,154,255,0.07) 0%,transparent 70%);pointer-events:none"></div>
+    <!-- Pencil sketch SVG -->
+    <svg width="100%" height="100%" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:0.1" filter="url(#pencil)">
+      <g stroke="#b89aff" stroke-width="0.8" fill="none" stroke-linecap="round">
+        <!-- notebook grid right side -->
+        <line x1="680" y1="70" x2="1160" y2="72"/><line x1="679" y1="132" x2="1161" y2="130"/>
+        <line x1="681" y1="194" x2="1159" y2="196"/><line x1="680" y1="256" x2="1160" y2="254"/>
+        <line x1="679" y1="318" x2="1161" y2="320"/><line x1="681" y1="380" x2="1159" y2="378"/>
+        <line x1="680" y1="442" x2="1160" y2="444"/><line x1="679" y1="504" x2="1161" y2="502"/>
+        <line x1="681" y1="566" x2="1159" y2="568"/>
+        <line x1="680" y1="70" x2="682" y2="568"/><line x1="742" y1="71" x2="740" y2="567"/>
+        <line x1="803" y1="70" x2="805" y2="568"/><line x1="864" y1="71" x2="862" y2="567"/>
+        <line x1="925" y1="70" x2="927" y2="568"/><line x1="986" y1="71" x2="984" y2="567"/>
+        <line x1="1047" y1="70" x2="1049" y2="568"/><line x1="1108" y1="71" x2="1106" y2="567"/>
+        <!-- bracket frame -->
+        <path d="M600,50 L558,52 L556,598 L602,596"/>
+        <path d="M1175,50 L1178,53 L1176,597 L1173,595"/>
+        <!-- scattered sketch marks -->
+        <path d="M80,580 Q105,555 130,582 Q155,609 178,580"/>
+        <path d="M60,630 L210,628"/>
+        <circle cx="290" cy="630" r="28"/>
+        <!-- asterisks -->
+        <line x1="540" y1="148" x2="540" y2="168"/><line x1="530" y1="158" x2="550" y2="158"/>
+        <line x1="533" y1="151" x2="547" y2="165"/><line x1="547" y1="151" x2="533" y2="165"/>
+        <line x1="190" y1="195" x2="190" y2="211"/><line x1="182" y1="203" x2="198" y2="203"/>
+        <line x1="184" y1="197" x2="196" y2="209"/><line x1="196" y1="197" x2="184" y2="209"/>
+        <!-- pencil shape bottom-left -->
+        <path d="M28,710 L62,674 L78,690 L44,726 Z"/>
+        <line x1="62" y1="674" x2="79" y2="660"/><line x1="78" y1="690" x2="91" y2="674"/>
+        <line x1="44" y1="726" x2="32" y2="730"/>
+        <line x1="36" y1="716" x2="70" y2="682"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-left">
+    <div class="hero-tag"><span class="tag-dot"></span>Available for Co-op &middot; London, ON</div>
+    <h1>Thushar<br><em>Joji</em></h1>
+    <p class="hero-sub">Full-stack developer and Computer Programming &amp; Analysis student at Fanshawe College. 4.04 GPA. Dean's Honours List. Fluent in four languages. Building real things with real stacks.</p>
+    <div class="hero-ctas">
+      <a href="mailto:thusharjoji2@gmail.com" class="btn btn-primary">Get in touch &#8599;</a>
+      <a href="https://github.com/thushar003" target="_blank" class="btn btn-ghost">GitHub &rarr;</a>
+      <a href="https://linkedin.com/in/thushar-joji-5a47301b2" target="_blank" class="btn btn-ghost">LinkedIn &rarr;</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-card"><div class="stat-num">4.04</div><div class="stat-label"><strong>Cumulative GPA</strong>Dean's Honours List &mdash; 4 consecutive terms</div></div>
+    <div class="stat-card"><div class="stat-num">35+</div><div class="stat-label"><strong>LeetCode Problems</strong>Algorithms, data structures, problem-solving</div></div>
+    <div class="stat-card"><div class="stat-num">4</div><div class="stat-label"><strong>Languages Spoken</strong>English &middot; Malayalam &middot; Hindi &middot; French (CLB 5&ndash;6)</div></div>
+    <div class="stat-card"><div class="stat-num">9+</div><div class="stat-label"><strong>Programming Languages</strong>From C++ and Java to Kotlin and TypeScript</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-text reveal">
+    <div class="section-label">// about</div>
+    <h2>Developer.<br><em>Student. Builder.</em></h2>
+    <p>I'm a third-year Computer Programming &amp; Analysis student at Fanshawe College in London, ON. My program coordinator <strong>personally recommended me</strong> for a professional software internship based on academic and project performance.</p>
+    <p>I work across the stack: React/TypeScript frontends backed by Supabase, Android apps in Kotlin, C# multi-layer web applications, C++ system tools, and Python-MySQL connectors. I've built team projects and solo projects and shipped real working software.</p>
+    <p>Outside of code, I sketch and draw &mdash; I like making things look good, not just work. I also work weekends at a Toyota manufacturing plant: <strong>confined space certified</strong>, comfortable in industrial environments, and used to high-accountability settings.</p>
+    <div class="languages-block">
+      <div class="lang-title">Languages spoken</div>
+      <div class="lang-pills">
+        <span class="lang-pill fluent">English &mdash; Fluent</span>
+        <span class="lang-pill fluent">Malayalam &mdash; Fluent</span>
+        <span class="lang-pill fluent">Hindi &mdash; Fluent</span>
+        <span class="lang-pill working">French &mdash; Working (CLB 5&ndash;6)</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-skills reveal">
+    <!-- tiny sketch wave decoration -->
+    <svg width="100%" viewBox="0 0 340 55" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:1.5rem;opacity:0.15" filter="url(#pencil)">
+      <g fill="none" stroke="#b89aff" stroke-width="1" stroke-linecap="round">
+        <path d="M8,28 Q42,6 76,28 Q110,50 144,28 Q178,6 212,28 Q246,50 280,28 Q310,10 332,28"/>
+        <circle cx="170" cy="28" r="12"/><line x1="158" y1="28" x2="182" y2="28"/><line x1="170" y1="16" x2="170" y2="40"/>
+      </g>
+    </svg>
+    <div class="section-label" style="margin-bottom:1rem">// tech stack</div>
+    <div class="skills-grid">
+      <div><div class="skill-group-title">Languages</div><div class="skill-tags"><span class="skill-tag">C++</span><span class="skill-tag">Java</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">C#</span><span class="skill-tag">Kotlin</span><span class="skill-tag">Python</span><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span></div></div>
+      <div><div class="skill-group-title">Frameworks</div><div class="skill-tags"><span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">Jetpack Compose</span></div></div>
+      <div><div class="skill-group-title">Databases</div><div class="skill-tags"><span class="skill-tag">MySQL</span><span class="skill-tag">SQL Server</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Supabase</span></div></div>
+      <div><div class="skill-group-title">Tools</div><div class="skill-tags"><span class="skill-tag">Git</span><span class="skill-tag">Android Studio</span><span class="skill-tag">Unity</span><span class="skill-tag">VS Code</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">// projects</div>
+  <h2>Things I've <em>built</em></h2>
+  <div class="projects-grid reveal">
+    <a class="project-card featured" href="https://github.com/thushar003" target="_blank">
+      <div class="project-num">01 &mdash; Featured &middot; Team Project</div>
+      <div class="project-name">Dating App</div>
+      <div class="project-desc">Built with a team of Fanshawe CPA students. React and TypeScript frontend backed by Supabase for auth, real-time data, and file storage. Practiced collaborative Git workflows, code review, and agile teamwork on a live shared codebase.</div>
+      <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">Supabase</span><span class="project-tag">Team Project</span></div>
+      <div class="project-arrow">&#8599;</div>
+    </a>
+    <a class="project-card" href="https://github.com/thushar003/Casestudy" target="_blank">
+      <div class="project-num">02</div>
+      <div class="project-name">Full-Stack CRUD App</div>
+      <div class="project-desc">Multi-layer C# web application with complete CRUD functionality, unit testing, separated ViewModels, DAOs, and Controllers. Full validation and exception handling.</div>
+      <div class="project-tags"><span class="project-tag">C#</span><span class="project-tag">JavaScript</span><span class="project-tag">HTML/CSS</span></div>
+      <div class="project-arrow">&#8599;</div>
+    </a>
+    <a class="project-card" href="https://github.com/thushar003/WeatherStats" target="_blank">
+      <div class="project-num">03</div>
+      <div class="project-name">WeatherStats Android</div>
+      <div class="project-desc">Android app fetching real-time weather for any location via the Weatherstack API. Built in Kotlin with Jetpack Compose. Deployed and fully functional.</div>
+      <div class="project-tags"><span class="project-tag">Kotlin</span><span class="project-tag">Jetpack Compose</span><span class="project-tag">API</span></div>
+      <div class="project-arrow">&#8599;</div>
+    </a>
+    <a class="project-card" href="https://github.com/thushar003" target="_blank">
+      <div class="project-num">04</div>
+      <div class="project-name">Python&ndash;MySQL Connector</div>
+      <div class="project-desc">Tool enabling SQL execution within Python IDEs, with proper output handling, try-catch error handling, and comprehensive data validation for bad inputs.</div>
+      <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">MySQL</span></div>
+      <div class="project-arrow">&#8599;</div>
+    </a>
+    <a class="project-card" href="https://github.com/thushar003/dungeon-flappybird" target="_blank">
+      <div class="project-num">05</div>
+      <div class="project-name">Unity Games</div>
+      <div class="project-desc">Flappy Bird clone, Mini-Golf Simulator, 2D Shooter &mdash; animated sprites, working score systems, full C# scripting. Handled all art assets and gameplay logic.</div>
+      <div class="project-tags"><span class="project-tag">Unity</span><span class="project-tag">C#</span></div>
+      <div class="project-arrow">&#8599;</div>
+    </a>
+    <a class="project-card" href="https://github.com/thushar003/leetcode-and-stuff" target="_blank">
+      <div class="project-num">06</div>
+      <div class="project-name">LeetCode &amp; DSA</div>
+      <div class="project-desc">35+ solved problems across arrays, trees, graphs, and dynamic programming. Auto-synced via LeetHub. Active and growing.</div>
+      <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">C++</span><span class="project-tag">Algorithms</span></div>
+      <div class="project-arrow">&#8599;</div>
+    </a>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label">// experience</div>
+  <h2>Where I've <em>worked</em></h2>
+  <div class="exp-item reveal">
+    <div><div class="exp-date">2025 &mdash; Present</div><div class="exp-company">Robinson Solutions</div></div>
+    <div><div class="exp-role">Industrial Cleaner &mdash; Toyota Plant, Woodstock ON</div><ul class="exp-bullets"><li>Specialized cleaning and maintenance in an active automotive manufacturing environment</li><li>Confined space certified; strict adherence to safety protocols in high-accountability industrial settings</li><li>Weekend shifts alongside production staff &mdash; comfortable in environments most CS grads aren't</li></ul></div>
+  </div>
+  <div class="exp-item reveal">
+    <div><div class="exp-date">Dec 2023 &mdash; May 2025</div><div class="exp-company">Chick-fil-A</div></div>
+    <div><div class="exp-role">Team Member &mdash; London, ON</div><ul class="exp-bullets"><li>Fast-paced customer-facing environment; built communication and teamwork skills</li><li>Consistent performance in a structured, high-volume setting</li></ul></div>
+  </div>
+  <div class="exp-item reveal">
+    <div><div class="exp-date">Sept 2023 &mdash; Present</div><div class="exp-company">Fanshawe College</div></div>
+    <div><div class="exp-role">Student &mdash; Computer Programming &amp; Analysis (CPA3)</div><ul class="exp-bullets"><li>GPA: 4.04 &mdash; Dean's Honours List: Fall 2023, Winter 2024, Fall 2024, Summer 2025</li><li>Personally recommended by program coordinator for a professional software internship</li><li>Programming competitions, 35+ LeetCode problems, hands-on team and solo projects</li></ul></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-glow"></div>
+  <svg width="260" height="50" viewBox="0 0 260 50" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 2rem;opacity:0.14" filter="url(#pencil)">
+    <g fill="none" stroke="#b89aff" stroke-width="1" stroke-linecap="round">
+      <path d="M15,25 Q65,5 130,25 Q195,45 245,25"/>
+      <circle cx="130" cy="25" r="13"/><line x1="117" y1="25" x2="143" y2="25"/><line x1="130" y1="12" x2="130" y2="38"/>
+    </g>
+  </svg>
+  <div class="section-label">// contact</div>
+  <h2>Let's <em>talk</em></h2>
+  <p>Open to co-op roles in software development, data, and industrial IT. Based in London, ON &mdash; available to start a work term. Always happy to chat.</p>
+  <div class="contact-links">
+    <a href="mailto:thusharjoji2@gmail.com" class="btn btn-primary">thusharjoji2@gmail.com &#8599;</a>
+    <a href="https://github.com/thushar003" target="_blank" class="btn btn-ghost">GitHub</a>
+    <a href="https://linkedin.com/in/thushar-joji-5a47301b2" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    <a href="https://leetcode.com/u/thusharjoji1/" target="_blank" class="btn btn-ghost">LeetCode</a>
+  </div>
+</section>
+
+<footer>
+  <span>Thushar Joseph Joji &mdash; London, ON</span>
+  <span style="opacity:0.45;font-size:0.65rem">Built with intention.</span>
+  <span>(226) 998&ndash;9806</span>
+</footer>
+
+<script>
+const dot = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  dot.style.left=mx-4+'px'; dot.style.top=my-4+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*0.11; ry+=(my-ry)*0.11;
+  ring.style.left=rx-15+'px'; ring.style.top=ry-15+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{dot.style.transform='scale(2.5)';ring.style.transform='scale(1.6)';ring.style.borderColor='rgba(184,154,255,0.7)';});
+  el.addEventListener('mouseleave',()=>{dot.style.transform='scale(1)';ring.style.transform='scale(1)';ring.style.borderColor='rgba(184,154,255,0.4)';});
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*100);});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
