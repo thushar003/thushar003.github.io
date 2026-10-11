@@ -4,7 +4,14 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Thushar Joji — QA, IT Support &amp; Software Development</title>
-<meta name="description" content="Thushar Joji: Fanshawe Computer Programming &amp; Analysis graduate (Dec 2026), 4.1 GPA. C#/.NET, React, xUnit testing. Open to entry-level QA, IT support and development roles in London, ON and the GTA."/>
+<meta name="description" content="Thushar Joji: Fanshawe Computer Programming &amp; Analysis graduate (Dec 2026), 4.1 GPA. C#/.NET, React, Angular, Spring Boot, COBOL on z/OS, xUnit and Cypress testing. Open to entry-level QA, IT support and development roles in London, ON and the GTA."/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Thushar Joji — QA, IT Support &amp; Software Development"/>
+<meta property="og:description" content="Fanshawe Computer Programming &amp; Analysis graduate (Dec 2026), 4.1 GPA. C#/.NET, React, Angular, xUnit and Cypress testing."/>
+<meta property="og:url" content="https://thushar003.github.io/"/>
+<meta property="og:image" content="https://thushar003.github.io/img/cypress-vendor.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0b14'/%3E%3Cpath d='M18 22h28M32 22v26' stroke='%23b89aff' stroke-width='7' stroke-linecap='round' fill='none'/%3E%3C/svg%3E"/>
 <script>
   document.documentElement.classList.add('js');
   try {
@@ -65,6 +72,8 @@ body::after {
 a { color:inherit; }
 a:focus-visible, button:focus-visible, .btn:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
 .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+.skip { position:absolute; left:-9999px; top:0; z-index:1000; background:var(--btn-bg); color:var(--btn-fg); padding:.6rem 1rem; border-radius:var(--radius); text-decoration:none; }
+.skip:focus { left:1rem; top:1rem; }
  
 /* ---------- BACKGROUND LAYERS ---------- */
 .bg { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
@@ -101,7 +110,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .nav-links a:hover { color:var(--accent); }
  
 /* ---------- LAYOUT ---------- */
-section { padding:6.5rem 3rem; max-width:1240px; margin:0 auto; }
+section { padding:6.5rem 3rem; max-width:1240px; margin:0 auto; scroll-margin-top:3rem; }
 h1, h2, h3 { font-family:var(--font-display); font-weight:var(--h-weight); letter-spacing:var(--h-track); line-height:1.02; }
 h2 { font-size:clamp(2rem,3.6vw,3.2rem); margin-bottom:2.6rem; }
 .lede { color:var(--muted); max-width:62ch; }
@@ -150,6 +159,9 @@ html[data-theme="daylight"] .hero-role { font-weight:400; font-size:clamp(1.3rem
  
 /* ---------- ABOUT ---------- */
 #about { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; border-top:1px solid var(--border); }
+.about-head { display:flex; align-items:center; justify-content:space-between; gap:1.6rem; margin-bottom:2.6rem; }
+.about-head h2 { margin-bottom:0; }
+.headshot { width:104px; height:104px; flex:none; object-fit:cover; border-radius:50%; border:1px solid var(--border); box-shadow:0 0 0 4px var(--bg), 0 0 0 5px color-mix(in srgb, var(--accent) 45%, transparent); }
 .about-text p { color:var(--muted); margin-bottom:1.1rem; max-width:62ch; }
 .about-text p strong { color:var(--text); font-weight:600; }
 .lang-title, .skill-group-title { font-size:.88rem; color:var(--accent); margin-bottom:.7rem; font-weight:600; }
@@ -179,6 +191,7 @@ a.card:hover, .card.hoverable:hover { border-color:var(--accent); transform:tran
 .tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:auto; padding-top:.4rem; }
 .tag { font-size:.76rem; padding:.12rem .55rem; border-radius:calc(var(--radius) - 2px); background:color-mix(in srgb, var(--accent) 10%, transparent); color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 28%, transparent); }
 .c-itinder { grid-column:span 7; } .c-beacon { grid-column:span 5; }
+.c-proof, .c-cobol { grid-column:span 12; }
 .c-weather { grid-column:span 5; grid-row:span 2; } .c-crud { grid-column:span 7; } .c-unity { grid-column:span 7; }
 .tree { font-family:'JetBrains Mono',monospace; font-size:.8rem; line-height:1.75; color:var(--muted); background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:calc(var(--radius) - 1px); padding:.8rem 1rem; transition:background-color .4s; }
 .tree span { color:var(--panel-muted); } .tree .hl { color:var(--ok); }
@@ -190,6 +203,31 @@ a.card:hover, .card.hoverable:hover { border-color:var(--accent); transform:tran
 .inline-link:hover { border-bottom-color:var(--accent); }
 .also-line { margin-top:1.8rem; color:var(--muted); font-size:.95rem; }
 .also-line a { color:var(--accent); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+ 
+/* ---------- CYPRESS PROOF CARD ---------- */
+.proof { display:grid; grid-template-columns:.9fr 1.1fr; gap:2.2rem; align-items:start; }
+.proof-text { display:flex; flex-direction:column; gap:.85rem; }
+.shots { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+.shot { display:block; width:100%; padding:0; border:1px solid var(--border); border-radius:calc(var(--radius) - 1px); background:var(--panel-bg); overflow:hidden; cursor:zoom-in; font:inherit; color:inherit; text-align:left; transition:border-color .2s, transform .2s; }
+.shot:hover { border-color:var(--accent); transform:translateY(-2px); }
+.shot img { display:block; width:100%; height:auto; }
+.shot figcaption { padding:.55rem .75rem; font-size:.78rem; color:var(--muted); border-top:1px solid var(--border); }
+.shots figure { margin:0; }
+.shots.one { grid-template-columns:1fr; }
+.proof.flip { grid-template-columns:1.1fr .9fr; }
+.proof.flip .shots { order:-1; }
+.pixel-note { margin-top:2.2rem; display:flex; gap:1.2rem; align-items:center; }
+.pixel-note img { width:132px; height:132px; flex:none; image-rendering:pixelated; border:1px solid var(--border); border-radius:calc(var(--radius) - 1px); box-shadow:0 0 0 4px var(--bg), 0 0 0 5px color-mix(in srgb, var(--accent) 35%, transparent); }
+.pixel-note p { color:var(--muted); font-size:.9rem; max-width:34ch; }
+.pixel-note p strong { color:var(--text); font-weight:600; }
+.card .shots { margin-top:.4rem; }
+.shots-note { grid-column:1 / -1; font-size:.8rem; color:var(--muted); }
+dialog#lightbox { border:1px solid var(--border); border-radius:calc(var(--radius) + 4px); background:var(--panel-bg); color:var(--panel-text); padding:.8rem; max-width:min(1100px,94vw); width:94vw; margin:auto; }
+dialog#lightbox::backdrop { background:rgba(4,3,10,.78); backdrop-filter:blur(4px); }
+dialog#lightbox img { display:block; width:100%; height:auto; border-radius:calc(var(--radius) - 1px); }
+dialog#lightbox .lb-bar { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.2rem .2rem .7rem; font-size:.85rem; color:var(--panel-muted); }
+dialog#lightbox .lb-close { border:1px solid var(--panel-border); background:transparent; color:var(--panel-text); font:inherit; font-size:.85rem; padding:.3rem .8rem; border-radius:99px; cursor:pointer; }
+dialog#lightbox .lb-close:hover { border-color:var(--accent); color:var(--accent); }
  
 /* ---------- TIMELINE ---------- */
 #experience { border-top:1px solid var(--border); }
@@ -223,7 +261,9 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
 /* ---------- CUSTOM CURSOR (mouse only) ---------- */
 #cursor, #cursor-ring { display:none; }
 @media (hover:hover) and (pointer:fine) {
-  body, a, .btn, .theme-btn { cursor:none; }
+  body, a, .btn, .theme-btn, .shot, .lb-close { cursor:none; }
+  dialog#lightbox, dialog#lightbox * { cursor:auto; }
+  dialog#lightbox .lb-close { cursor:pointer; }
   #cursor, #cursor-ring { opacity:0; }
   #cursor.on, #cursor-ring.on { opacity:1; }
   #cursor { display:block; width:9px; height:9px; border-radius:50%; background:var(--accent); position:fixed; top:0; left:0; pointer-events:none; z-index:9999; mix-blend-mode:difference; transition:transform .2s ease; }
@@ -238,7 +278,10 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
   #about { grid-template-columns:1fr; gap:3rem; }
   .skills-grid { grid-template-columns:1fr; }
   .projects-grid { grid-template-columns:1fr; }
-  .c-itinder, .c-beacon, .c-weather, .c-crud, .c-unity { grid-column:auto; grid-row:auto; }
+  .c-itinder, .c-beacon, .c-proof, .c-cobol, .c-weather, .c-crud, .c-unity { grid-column:auto; grid-row:auto; }
+  .proof, .proof.flip { grid-template-columns:1fr; gap:1.6rem; }
+  .proof.flip .shots { order:0; }
+  .shots { grid-template-columns:1fr; }
   footer { flex-direction:column; text-align:center; padding:1.4rem; }
   .themes-label { display:none; } .theme-btn { padding:.4rem .5rem; } .theme-btn span { display:none; }
   .themes { right:50%; transform:translateX(50%); }
@@ -251,6 +294,8 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
 </style>
 </head>
 <body>
+ 
+<a class="skip" href="#about">Skip to content</a>
  
 <div class="bg" aria-hidden="true">
   <div class="bg-glow"></div>
@@ -301,6 +346,7 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
       <a href="mailto:thusharjoji2@gmail.com" class="btn btn-primary">Get in touch</a>
       <a href="https://github.com/thushar003" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
       <a href="https://linkedin.com/in/thushar-joji-5a47301b2" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      <a href="Thushar_Joji_Resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost">Résumé (PDF)</a>
     </div>
   </div>
  
@@ -309,21 +355,27 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
     <ul class="t-list">
       <li class="t-row" data-state="pass"><span class="t-badge"></span><span class="t-label">GPA 4.1, Dean's Honours<small>all 5 semesters so far</small></span></li>
       <li class="t-row" data-state="pass"><span class="t-badge"></span><span class="t-label">11+ xUnit tests<small>college CRUD project, API endpoints</small></span></li>
+      <li class="t-row" data-state="pass"><span class="t-badge"></span><span class="t-label">Cypress end-to-end tests<small>CRUD flows for vendors and employees, Angular app</small></span></li>
+      <li class="t-row" data-state="pass"><span class="t-badge"></span><span class="t-label">COBOL and JCL batch programs<small>IBM z/OS mainframe, 4 months of coursework</small></span></li>
       <li class="t-row" data-state="pass"><span class="t-badge"></span><span class="t-label">TEF Canada French, Aug 2026<small>writing C1, reading / listening / speaking B2</small></span></li>
       <li class="t-row" data-state="pass"><span class="t-badge"></span><span class="t-label">Agile team project, React front end<small>iTinder, 4-person team</small></span></li>
       <li class="t-row" data-state="run"><span class="t-badge"></span><span class="t-label">Selenium UI tests<small>being added to Beacon</small></span></li>
       <li class="t-row" data-state="run"><span class="t-badge"></span><span class="t-label">ISTQB Certified Tester, Foundation Level</span></li>
       <li class="t-row" data-state="run"><span class="t-badge"></span><span class="t-label">CompTIA A+</span></li>
     </ul>
-    <div class="runner-foot" id="runner-foot"><span><b>4 passed</b>, <em>3 in progress</em></span><span>7 checks</span></div>
+    <div class="runner-foot" id="runner-foot"><span><b>6 passed</b>, <em>3 in progress</em></span><span>9 checks</span></div>
   </div>
 </section>
  
 <section id="about">
   <div class="about-text">
-    <h2>Developer who tests.</h2>
+    <div class="about-head">
+      <h2>Developer who tests.</h2>
+      <!-- Optional headshot: add img/headshot.jpg (square crop, about 400x400). The image hides itself if the file is missing. -->
+      <img class="headshot" src="img/headshot.jpg" alt="Portrait of Thushar Joji" width="104" height="104" loading="lazy" onerror="this.style.display='none'"/>
+    </div>
     <p>I finish the Computer Programming &amp; Analysis advanced diploma at Fanshawe College in December 2026, with a <strong>4.1 GPA and Dean's Honours in all five semesters so far</strong>. My program coordinator recommended me to a software company for a summer internship based on my academic and project performance.</p>
-    <p>I work across the stack: React front ends, C#/ASP.NET Core back ends, SQL databases, and a native Android app in Kotlin. I write <strong>xUnit tests</strong> for my back-end code and I'm adding <strong>Selenium</strong> browser automation to my projects, alongside studying for the ISTQB Certified Tester Foundation Level and CompTIA A+.</p>
+    <p>I work across the stack: React and Angular front ends, C#/ASP.NET Core and Spring Boot back ends, SQL databases, and a native Android app in Kotlin. I've also spent four months writing COBOL and JCL batch jobs on an IBM z/OS mainframe. I write <strong>xUnit tests</strong> for my back-end code and <strong>Cypress end-to-end tests</strong> for the front end, and I'm adding <strong>Selenium</strong> browser automation to Beacon, alongside studying for the ISTQB Certified Tester Foundation Level and CompTIA A+.</p>
     <p>Before moving into tech I worked in customer service and on an industrial production site. Those jobs taught me to stay calm under pressure, handle escalations, and work as part of a team. Outside of code, I sketch and draw.</p>
     <div class="languages-block">
       <div class="lang-title">Languages spoken</div>
@@ -337,12 +389,16 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
   </div>
   <div class="about-skills">
     <div class="skills-grid">
-      <div><div class="skill-group-title">Languages</div><div class="skill-tags"><span class="skill-tag">C#</span><span class="skill-tag">Java</span><span class="skill-tag">C++</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Kotlin</span><span class="skill-tag">SQL</span><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span></div></div>
-      <div><div class="skill-group-title">Frameworks</div><div class="skill-tags"><span class="skill-tag">ASP.NET Core</span><span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">Jetpack Compose</span></div></div>
-      <div><div class="skill-group-title">Databases</div><div class="skill-tags"><span class="skill-tag">SQL Server</span><span class="skill-tag">MySQL</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">Supabase</span></div></div>
-      <div><div class="skill-group-title">Testing &amp; tools</div><div class="skill-tags"><span class="skill-tag">xUnit</span><span class="skill-tag">Git / GitHub</span><span class="skill-tag">Code review</span><span class="skill-tag">Visual Studio</span><span class="skill-tag">VS Code</span><span class="skill-tag">Android Studio</span></div></div>
+      <div><div class="skill-group-title">Languages</div><div class="skill-tags"><span class="skill-tag">C#</span><span class="skill-tag">Java</span><span class="skill-tag">C++</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Kotlin</span><span class="skill-tag">SQL</span><span class="skill-tag">COBOL</span><span class="skill-tag">JCL</span><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span></div></div>
+      <div><div class="skill-group-title">Frameworks</div><div class="skill-tags"><span class="skill-tag">ASP.NET Core</span><span class="skill-tag">React</span><span class="skill-tag">Angular</span><span class="skill-tag">Spring Boot</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">Jetpack Compose</span></div></div>
+      <div><div class="skill-group-title">Databases</div><div class="skill-tags"><span class="skill-tag">SQL Server</span><span class="skill-tag">MySQL</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">Supabase</span><span class="skill-tag">VSAM</span></div></div>
+      <div><div class="skill-group-title">Testing &amp; tools</div><div class="skill-tags"><span class="skill-tag">xUnit</span><span class="skill-tag">Cypress</span><span class="skill-tag">Git / GitHub</span><span class="skill-tag">Code review</span><span class="skill-tag">Visual Studio</span><span class="skill-tag">VS Code</span><span class="skill-tag">Android Studio</span><span class="skill-tag">IBM z/OS</span></div></div>
       <div><div class="skill-group-title">In progress</div><div class="skill-tags"><span class="skill-tag progress">Selenium</span><span class="skill-tag progress">ISTQB CTFL</span><span class="skill-tag progress">CompTIA A+</span></div></div>
       <div><div class="skill-group-title">Familiar with</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Unity</span></div></div>
+    </div>
+    <div class="pixel-note">
+      <img src="img/starry-night.gif" alt="Animated pixel art of Van Gogh's The Starry Night, 50 by 50 pixels, with twinkling stars and swirling clouds" width="132" height="132" loading="lazy"/>
+      <p><strong>Outside of code:</strong> my pixel-art take on <em>The Starry Night</em>, drawn in Aseprite on a 50&times;50 canvas with nine layers and animated stars and clouds.</p>
     </div>
   </div>
 </section>
@@ -351,17 +407,33 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
   <h2>Things I've built</h2>
   <div class="projects-grid">
  
-    <a class="card c-itinder" href="https://github.com/thushar003" target="_blank" rel="noopener">
-      <div class="card-meta">Team project, 4-person Agile team</div>
+    <div class="card c-itinder">
+      <div class="card-meta">Team project, 4-person Agile team (planned for 5 to 6)</div>
       <h3>iTinder: dating application</h3>
-      <p>A dating app built in sprints with feature branches and peer code review. I was the core front-end engineer.</p>
+      <p>A networking and dating app for IT professionals, built in sprints with feature branches and peer code review. I was the UI/UX lead and built my own designs in React.</p>
       <ul class="mine">
-        <li>Built responsive, component-driven React interfaces with user state management</li>
+        <li>Led the UI/UX: designed the visual identity, screens, interactions and animations, often sketching concepts on the fly</li>
+        <li>Implemented those designs as responsive, component-driven React interfaces with user state management</li>
         <li>Took part in the Supabase (PostgreSQL) schema design, including third-party authentication and skill-based matching queries</li>
         <li>Pushed my own code, reviewed teammates' code and merged pull requests</li>
       </ul>
+      <div class="shots">
+        <figure>
+          <button type="button" class="shot" data-full="img/itinder-home.png" data-title="iTinder home page, signed-in view" aria-label="Enlarge the iTinder home page screenshot">
+            <img src="img/itinder-home.png" alt="iTinder home page with the headline Discover Connections That Actually Matter, a navigation bar and three feature cards" loading="lazy"/>
+            <figcaption>Home page, signed in</figcaption>
+          </button>
+        </figure>
+        <figure>
+          <button type="button" class="shot" data-full="img/itinder-team.png" data-title="iTinder team page" aria-label="Enlarge the iTinder team page screenshot">
+            <img src="img/itinder-team.png" alt="iTinder team page listing four team members and their roles" loading="lazy"/>
+            <figcaption>Team page</figcaption>
+          </button>
+        </figure>
+      </div>
+      <p class="card-meta">The source is in a private team repository. I'm happy to walk through the code in an interview.</p>
       <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Supabase</span></div>
-    </a>
+    </div>
  
     <a class="card c-beacon" href="https://github.com/thushar003/Beacon" target="_blank" rel="noopener">
       <span class="chip">In development</span>
@@ -376,6 +448,66 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
       <div class="tags"><span class="tag">C#</span><span class="tag">ASP.NET Core</span><span class="tag">React</span><span class="tag">xUnit</span><span class="tag">Selenium</span></div>
     </a>
  
+    <div class="card c-proof">
+      <div class="proof">
+        <div class="proof-text">
+          <div class="card-meta">College project, full stack</div>
+          <h3>Angular and Spring Boot app, tested end to end with Cypress</h3>
+          <p>An Angular front end and Spring Boot back end for managing vendors and employees. I wrote both, then wrote Cypress specs that drive the real app in a browser and check each create, read, update and delete flow, plus a page-load check on both pages.</p>
+          <ul class="mine">
+            <li>Separate spec files per operation, plus a combined suite for each entity</li>
+            <li>Runs in the Cypress test runner against the app on localhost</li>
+            <li>All specs passing in the runs shown here</li>
+          </ul>
+          <div style="display:flex; gap:1.1rem; flex-wrap:wrap;">
+            <a class="inline-link" href="https://github.com/thushar003/5153casestudy_client" target="_blank" rel="noopener">Angular source code</a>
+          </div>
+          <div class="tags"><span class="tag">Angular</span><span class="tag">TypeScript</span><span class="tag">Spring Boot</span><span class="tag">Java</span><span class="tag">Cypress</span></div>
+        </div>
+        <div class="shots">
+          <figure>
+            <button type="button" class="shot" data-full="img/cypress-vendor.png" data-title="Cypress run: vendor.cy.ts, 4 of 4 passing" aria-label="Enlarge Cypress run for the vendor specs">
+              <img src="img/cypress-vendor.png" alt="Cypress test runner showing the vendor spec with 4 passing tests: create, page load, update and delete" loading="lazy"/>
+              <figcaption>Vendor specs: 4 of 4 passing</figcaption>
+            </button>
+          </figure>
+          <figure>
+            <button type="button" class="shot" data-full="img/cypress-employee.png" data-title="Cypress run: employee.cy.ts, 4 of 4 passing" aria-label="Enlarge Cypress run for the employee specs">
+              <img src="img/cypress-employee.png" alt="Cypress test runner showing the employee spec with 4 passing tests: create, page load, update and delete" loading="lazy"/>
+              <figcaption>Employee specs: 4 of 4 passing</figcaption>
+            </button>
+          </figure>
+          <p class="shots-note">Select a screenshot to enlarge it.</p>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="card c-cobol">
+      <div class="proof flip">
+        <div class="proof-text">
+          <div class="card-meta">College coursework, about 4 months, IBM z/OS mainframe</div>
+          <h3>COBOL and JCL batch processing on z/OS</h3>
+          <p>Four months of mainframe programming in the batch-processing style that banks and insurers still use to run back-office systems. I wrote the COBOL programs and the JCL (job control language) that runs them, working through a remote 3270 terminal session on IBM z/OS.</p>
+          <ul class="mine">
+            <li>Wrote JCL to submit and run the programs as batch jobs</li>
+            <li>Read records from files, including VSAM key-sequenced datasets (KSDS) where each record is found by its key</li>
+            <li>Built formatted reports from the records the programs read</li>
+            <li>Wrote programs that updated records in those files</li>
+          </ul>
+          <p>COBOL is strict about record layouts and data definitions, and working through it for four months made me methodical about both.</p>
+          <div class="tags"><span class="tag">COBOL</span><span class="tag">JCL</span><span class="tag">z/OS</span><span class="tag">VSAM</span></div>
+        </div>
+        <div class="shots one">
+          <figure>
+            <button type="button" class="shot" data-full="img/cobol-zos.png" data-title="3270 terminal session viewing a VSAM KSDS dataset on z/OS" aria-label="Enlarge the z/OS terminal screenshot">
+              <img src="img/cobol-zos.png" alt="IBM Remote Connection Emulator showing a VSAM KSDS dataset with record keys, last names and first names" loading="lazy"/>
+              <figcaption>3270 session viewing a VSAM KSDS dataset</figcaption>
+            </button>
+          </figure>
+        </div>
+      </div>
+    </div>
+
     <div class="card c-weather hoverable">
       <div class="card-meta">Solo project, Android</div>
       <h3>WeatherStats</h3>
@@ -447,6 +579,7 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
     <a href="mailto:thusharjoji2@gmail.com" class="btn btn-primary">thusharjoji2@gmail.com</a>
     <a href="https://github.com/thushar003" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
     <a href="https://linkedin.com/in/thushar-joji-5a47301b2" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+    <a href="Thushar_Joji_Resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost">Résumé (PDF)</a>
     <a href="https://leetcode.com/u/thusharjoji1/" target="_blank" rel="noopener" class="btn btn-ghost">LeetCode</a>
   </div>
 </section>
@@ -456,6 +589,11 @@ footer { border-top:1px solid var(--border); padding:1.4rem 3rem; display:flex; 
   <span>Updated October 2026</span>
   <span>(226) 998-9806</span>
 </footer>
+ 
+<dialog id="lightbox" aria-label="Enlarged screenshot">
+  <div class="lb-bar"><span id="lb-title"></span><button type="button" class="lb-close" id="lb-close">Close</button></div>
+  <img id="lb-img" alt=""/>
+</dialog>
  
 <div class="themes" role="group" aria-label="Page theme">
   <span class="themes-label">Theme</span>
@@ -497,6 +635,24 @@ document.addEventListener('keydown', e => {
     }, 700 + i * 380);
   });
   setTimeout(() => foot.classList.add('shown'), 700 + rows.length * 380 + 500);
+})();
+ 
+/* ----- screenshot lightbox ----- */
+(function () {
+  const dlg = document.getElementById('lightbox');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  const img = document.getElementById('lb-img');
+  const title = document.getElementById('lb-title');
+  document.querySelectorAll('.shot').forEach(b => {
+    b.addEventListener('click', () => {
+      img.src = b.dataset.full;
+      img.alt = b.querySelector('img').alt;
+      title.textContent = b.dataset.title || '';
+      dlg.showModal();
+    });
+  });
+  document.getElementById('lb-close').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
 })();
  
 /* ----- cursor (mouse only) ----- */
